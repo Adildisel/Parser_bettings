@@ -1,5 +1,5 @@
 """
-    Все необходимые данные сохраняются в файле simple_option.csv в папке data
+    Все необходимые данные сохраняются в файл simple_option.csv в папке data.
 """
 import time 
 import logging
@@ -14,9 +14,8 @@ import pyprind
 
 from save_data2file_csv import SaveDataToFile
 from logs import log
-log.main_log(name='senple_option')
 
-class MySelenium:
+class MySeleniumSimple:
     def __init__(self):
         """
         -------------
@@ -29,14 +28,14 @@ class MySelenium:
     
     def initUi(self):
         """ Формируем файл для сохранения loggers уровня  WARNING """
-        log.main_log(name='simple_option')
+        log.main_log(name=self.file_name)
 
     def init_driver(self):
         """ Инициализируем экземпляр драйвера. Драйвер ждет 5 секунд перед следующим действием """
-        logger = logging.getLogger('Betting.MySelenium.init_driver')
+        logger = logging.getLogger('Betting.MySeleniumSimple.init_driver')
         self.driver = webdriver.Firefox()
         self.driver.wait = WebDriverWait(self.driver, 5)
-        logger.info('Инициализация экземпляра драйвера прошла успешна!')
+        logger.info('Инициализация экземпляра драйвера прошла успешно!')
 
     def get_all_feedbacks(self):
         """ Обработка автоматического нажатия кнопки для получения всех страниц с отзывами пользователей. 
@@ -44,7 +43,7 @@ class MySelenium:
             Далее в цикле ждем пока все необходимые элементы полностью загрузятся
             После чего жмем кнопку 
         """ 
-        logger = logging.getLogger('Betting.MySelenium.get_all_feedbacks')
+        logger = logging.getLogger('Betting.MySeleniumSimple.get_all_feedbacks')
         element = self.driver.find_element_by_xpath("//button[@id='all-feedbacks-more-btn']")
         page = element.get_attribute('data-total-pages')
         bar = pyprind.ProgBar(int(page), title='Идет обновление страниц пожалуйста подождите...')
@@ -67,7 +66,7 @@ class MySelenium:
                 - Оценка.
                 - Текст.
         """
-        logger = logging.getLogger('Betting.MySelenium.get_elements_from_feedbacks')
+        logger = logging.getLogger('Betting.MySeleniumSimple.get_elements_from_feedbacks')
         try:
             all_list_feedbacks = self.driver.wait.until(EC.presence_of_element_located(
                 (By.ID, "all-feedbacks-list")
@@ -109,13 +108,13 @@ class MySelenium:
 
     def lookup(self, url):
         """ Открывает страницу Отзывов в  Firefox"""
-        logger = logging.getLogger('Betting.MySelenium.lookup')
+        logger = logging.getLogger('Betting.MySeleniumSimple.lookup')
         self.driver.get(url)
         logger.info('Страница успешно загружена!')
         
 def main():
     url = 'https://bookmaker-ratings.ru/review/obzor-bukmekerskoj-kontory-ligastavok/all-feedbacks/'
-    my_selenium = MySelenium()
+    my_selenium = MySeleniumSimple()
     my_selenium.init_driver()
     my_selenium.lookup(url)
     my_selenium.get_all_feedbacks()

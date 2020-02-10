@@ -1,3 +1,4 @@
+""" --- """
 import csv
 import os
 import logging
@@ -12,7 +13,7 @@ class SaveDataToFile:
         self.filename = filename
 
     def clear_file(self):
-        """"""
+        """ Вызвать при очистки данных. """
         with open(os.path.join(dirname, 
                             'data/{}.csv'.format(self.filename)),
                             'w',
@@ -20,7 +21,7 @@ class SaveDataToFile:
             csv.writer(file)
 
     def save_to_csv(self, data):
-        """"""
+        """ Вызвать для сохранения данных, принимает словарь. """
         logger = logging.getLogger('Betting.SaveDataToFile.save_to_csv')
         with open(os.path.join(dirname, 
                             'data/{}.csv'.format(self.filename)),

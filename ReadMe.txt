@@ -6,6 +6,6 @@ https://selenium-python.readthedocs.io/installation.html#drivers - список 
 
 2.  pip install -r req.txt
 
-3.  python3 simple_option.py - для простого варианта задания
+3.  python3 simple_option.py - для простого варианта задания && python3 difficult_option.py - для варианта посложнее
 
 
